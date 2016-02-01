@@ -1,11 +1,8 @@
 package com.example.regex;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*! Here's a block of text to use as input to regular expression matcher. Note that we'll first extract the block of text by looking for the special delimiters, then process the extracted block. !*/
 
@@ -17,34 +14,33 @@ public class Groups
 
 	public static void main(String[] args)
 	{
-		File file = new java.io.File("E:\\developer\\workspace\\JavaTest\\src\\com\\example\\regex\\Groups.java");
-		String s = null;
-		try
-		{
-			BufferedInputStream in = new BufferedInputStream(new FileInputStream(file));
-			byte[] bytes = new byte[in.available()];
-			in.read(bytes);
-			s = new String(bytes);
-		} catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-//		String[] strs = Pattern.compile("\n").split(POM);
-		//		while (matcher.find())
-		//		{
-		//			System.out.println(matcher.group() + " \t\t[start=" + matcher.start() + "-" + matcher.end() +"]");
-		//		}
-//		for (String s : strs)
+		File file = new java.io.File("F:\\Github\\JavaTest\\src\\com\\example\\regex\\Groups.java");
+		String s = TextFile.openFile(file.getAbsolutePath());
+
+//		Matcher matcher = Pattern.compile("^/\\*!(.*)!\\*/$", Pattern.MULTILINE | Pattern.DOTALL).matcher(s);
+//		String matched = "";
+//		if (matcher.find())
 //		{
-//			System.out.println(s);
+//			matched = matcher.group();
+//			System.out.println(matched + "\n" + matcher.group(1));
 //		}
-		//		System.out.println(matcher.lookingAt());
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		
+//		Matcher m = Pattern.compile("[aoeiu]").matcher(matched);
+//		StringBuffer buffer = new StringBuffer();
+//		while (m.find())
+//		{
+//			m.appendReplacement(buffer, m.group().toUpperCase());
+//		}
+//		m.appendTail(buffer);
 		
-		System.out.println(s);
+		
+
+		//		System.out.println(s.replaceAll("(?m)^( +|\t+)", ""));
+//		System.out.println(matched);
+//		System.out.println(buffer);
+		
+		Matcher m = Pattern.compile("class +\\b(.+)\\b").matcher(s);
+		if (m.find())
+			System.out.print(m.group(1));
 	}
 }
